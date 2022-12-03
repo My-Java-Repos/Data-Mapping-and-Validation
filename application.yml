@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-door-api
+spec:
+  loadBalancerIP: <ENTER STATIC IP HERE>
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: front-door-api
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: front-door-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: front-door-api
+    spec:
+      containers:
+      - name: front-door-api
+        image: apicatalogcontainerregistry.azurecr.io/frontdoorapidemo:latest
+        ports:
+        - containerPort: 5000
+      imagePullSecrets:
+        - name: regsecret
