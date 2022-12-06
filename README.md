@@ -1,5 +1,5 @@
 # the-next-java
-Data Mapping and Validation for Project sample_project
+## Data Mapping and Validation for Project sample_project
 
 ### Front Door API
 
